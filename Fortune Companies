@@ -1,0 +1,28 @@
+SELECT company_name, industry,
+CASE WHEN maternity_leave_weeks >= 12 THEN 'More than 3 months'
+ELSE 'Less than 3 months'
+END AS maternity_leave_category
+FROM fortune_companies
+ORDER BY maternity_leave_weeks;
+
+SELECT industry, company_name, paid_time_off_days, maternity_leave_weeks, healthcare_benefits
+FROM fortune_companies
+WHERE paid_time_off_days > 19
+AND maternity_leave_weeks >= 12
+AND healthcare_benefits=1 
+ORDER BY paid_time_off_days asc;
+
+SELECT industry, ROUND(AVG(revenue) * 100.1) AS "Average Industry Revenue" 
+FROM fortune_companies
+GROUP BY industry
+ORDER BY "Average Industry Revenue" DESC;
+
+Select industry, MAX(paid_time_off_days) AS "PTO"
+FROM fortune_companies
+GROUP BY industry
+ORDER BY "PTO" DESC;
+
+SELECT ROUND (SUM(revenue*100.1)) AS "Rounded Revenue", industry
+FROM fortune_companies
+GROUP BY industry
+Having "Rounded Revenue" >=200000;
