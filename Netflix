@@ -1,0 +1,34 @@
+SELECT title, release_year, director
+FROM netflix_titles_info
+JOIN netflix_people ON netflix_titles_info.show_id = netflix_people.show_id
+ORDER BY release_year desc;
+
+SELECT count(*)
+FROM netflix_titles_info
+WHERE type='Movie';
+
+select max(date(date_added)) 
+FROM "netflix_titles_info";
+
+SELECT title
+FROM "netflix_titles_info"
+ORDER BY title asc;
+
+SELECT title, director 
+FROM "netflix_titles_info"
+JOIN netflix_people ON netflix_titles_info.show_id=netflix_people.show_id
+WHERE title='The Starling';
+
+
+SELECT 
+director 
+FROM "netflix_titles_info" titles 
+LEFT JOIN "netflix_people" people 
+ON titles.show_id=people.show_id 
+WHERE titles.title='The Starling';
+
+SELECT title, release_year 
+FROM "netflix_titles_info" 
+WHERE type='Movie' 
+ORDER BY release_year asc 
+LIMIT 1; 
