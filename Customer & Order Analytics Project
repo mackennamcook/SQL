@@ -1,0 +1,43 @@
+SELECT distinct acctnum
+FROM BIT_DB.customers cust
+INNER JOIN BIT_DB.FebSales FEB ON cust.order_ID=FEB.orderid
+Where length(orderid)=6
+AND orderid <> 'Order ID';
+
+SELECT min(price),product
+FROM BIT_DB.JanSales;
+GROUP by product, price
+ORDER BY price
+
+SELECT distinct product, MIN(price)
+FROM BIT_DB.JanSales Jan
+GROUP BY product, price
+ORDER BY price ASC LIMIT 1;
+
+SELECT SUM(quantity) * (price) AS 'Revenue'
+FROM BIT_DB.JanSales
+GROUP BY product;
+
+SELECT product, location, SUM(quantity * price) AS Revenue
+FROM BIT_DB.FebSales
+WHERE product <> 'Product'
+GROUP BY product
+HAVING Revenue <> 0;
+
+SELECT
+sum(Quantity),
+product,
+sum(quantity)*price as revenue
+FROM BIT_DB.FebSales
+WHERE location = '548 Lincoln St, Seattle, WA 98101'
+GROUP BY product;
+
+SELECT
+count(distinct cust.acctnum),
+avg(quantity*price)
+FROM BIT_DB.FebSales Feb
+LEFT JOIN BIT_DB.customers cust
+ON FEB.orderid=cust.order_id
+WHERE Feb.Quantity>2
+AND length(orderid) = 6
+AND orderid <> 'Order ID'
