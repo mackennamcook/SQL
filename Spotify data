@@ -1,0 +1,51 @@
+Top ten tracks and artists?
+SELECT track_name, artist_name, popularity
+FROM BIT_DB.spotifydata
+ORDER BY popularity desc
+LIMIT 10
+
+
+Which three artists have the most songs in the top 50?
+
+SELECT artist_name, COUNT(*) AS mention_count, ROUND(popularity, 2) AS rounded_popularity
+FROM BIT_DB.Spotifydata
+GROUP BY artist_name 
+HAVING COUNT(*) > 1
+ORDER BY mention_count DESC
+LIMIT 3;
+
+What is the danceability in the top 10?
+
+SELECT track_name, artist_name, danceability, popularity
+FROM BIT_DB.Spotifydata
+ORDER BY popularity DESC
+LIMIT 10;
+
+What artists have the highest danceability in thier songs?
+
+SELECT track_name,artist_name, danceability  
+FROM BIT_DB.spotifydata
+ORDER BY danceability DESC
+LIMIT 5;
+
+Which artist have the danceabilty .8 or greater and popularity .8 or greater?
+
+SELECT artist_name, track_name, danceability, popularity
+FROM BIT_DB.spotifydata
+WHERE popularity >= 0.8
+AND danceability >= 0.8;
+
+
+Whats the lowest loudness and popularity?
+
+SELECT loudness, artist_name, track_name, popularity
+FROM BIT_DB.Spotifydata
+ORDER BY loudness
+LIMIT 5;
+
+Whats the shortest and longest song in the top 50?
+
+SELECT track_name, duration_ms
+FROM BIT_DB.Spotifydata
+WHERE duration_ms = (SELECT MAX(duration_ms) FROM BIT_DB.Spotifydata)
+   OR duration_ms = (SELECT MIN(duration_ms) FROM BIT_DB.Spotifydata);
